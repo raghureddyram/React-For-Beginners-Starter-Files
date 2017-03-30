@@ -1,9 +1,9 @@
 import React from 'react';
-import StorePicker from './StorePicker';
 import Header from './Header';
 import Fish from './Fish';
 import Inventory from './Inventory';
 import Order from './Order';
+import base from '../base';
 import sampleFishes from '../sample-fishes';
 class App extends React.Component{
   constructor(){
@@ -19,6 +19,20 @@ class App extends React.Component{
     }
   }
 
+  componenetWillUpdate(){
+    
+  }
+
+  componentWillMount(){
+    this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
+      context: this,
+      state: 'fishes',
+    });
+  }
+
+  componentWillUnmount(){
+    base.removeBinding(this.ref);
+  }
   addFish(fish){
     //update our state
     // do that by taking copy of current state, then update. for performance
