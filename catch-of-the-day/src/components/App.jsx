@@ -44,7 +44,7 @@ class App extends React.Component{
 
     order[key] = (order[key] + 1) || 1;
 
-    this.setState({order});
+    this.setState({order: order});
   }
 
     render(){
@@ -58,7 +58,7 @@ class App extends React.Component{
                         .map((key) => <Fish key={key} addToOrder={this.addToOrder} details={this.state.fishes[key]} identifier={key}/>)}
                     </ul>
                 </div>
-                <Order />
+                <Order fishes={this.state.fishes} order={this.state.order}/>
                 <Inventory loadSamples={this.loadSamples} addFish={this.addFish}/>
             </div>
         )
